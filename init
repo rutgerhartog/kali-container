@@ -1,0 +1,6 @@
+#!/bin/bash
+
+mkdir -p /container/.ssh && mkdir -p /root/.ssh && cp /container/.ssh/* /root/.ssh/
+cp /container/sshd_config /etc/ssh/sshd_config || echo "No sshd_config found -> falling back to default config"
+ssh-keygen -A && mkdir -p /run/sshd || echo "Failed to create keys"
+/usr/sbin/sshd -D
